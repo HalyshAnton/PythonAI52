@@ -93,3 +93,42 @@ class Dog:
 # dog = Dog(name='tuzik', age=5)
 # dog.age += 2
 # dog.color = 'brown'
+
+
+# Завдання 5
+# Створіть клас Car з атрибутами brand(марка), year(рік
+# випуску), is_ready(чи готовий до поїздки, за замовчування
+# False).
+# Додайте метод start_engine який заводить двигун, і змінює
+# атрибут is_ready
+# Додайте метод move який виводить повідомлення, що
+# автомобіль їде, або ж ще не готовий в залежності від is_ready.
+
+
+class Car:
+    def __init__(self, brand, year):
+        self.brand = brand
+        self.year = year
+        self.is_ready = False
+
+    def start_engine(self):
+        self.is_ready = True
+        print('двигун заведено')
+
+    def move(self, distance):
+        # автомобіль не заведений
+        if not self.is_ready:
+            print('автомобіль не може їхати бо не заведений')
+            return
+
+        # автомобіль заведений
+        print(f"автомобіль проїхав {distance} км")
+
+
+car = Car('BMW', 2021)
+
+car.move(10)
+
+car.start_engine()
+
+car.move(5)
