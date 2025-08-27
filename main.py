@@ -68,6 +68,7 @@
 #
 #     def deposit(self, price):
 #         self.budget += price
+import typing
 
 
 # Інкапсуаляція
@@ -137,23 +138,106 @@ class Cat:
 # # model.train(data)
 
 
-# typing
-import typing
+# # typing
+# import typing
+#
+# # typing.List[тип елементів]
+#
+# # якщо може бути різні типи даних
+# # typing.List[тип1 | тип2 | тип3]
+# typing.List[int | float]
+#
+#
+#
+# # def func(param1: int, param2: typing.List[str]):
+# #     for item in param2:
+# #         item.
+#
+# cat = Cat('Murchick', 3, 'black')
+# num = 10
+#
+# print(type(num))
+# print(type(cat))
 
-# typing.List[тип елементів]
+# Завдання 5. Онлайн-магазин
+# Створіть наступні класи:
+#
+# Product – атрибути name, price
+# Customer – атрибути name, balance
+# Cart – атрибути owner, items (список продуктів)
+#
+# Методи:
+#
+# add_product(product) – додає товар у кошик
+# checkout() – знімає з балансу покупця вартість усіх товарів (якщо грошей вистачає)
+# show_cart() – виводить список товарів і їх загальну вартість
+#
+# Напишіть функцію create_customer() та create_product(), які повертають об’єкти.
+# Створіть кілька товарів, покупців і дайте їм зробити покупки.
 
-# якщо може бути різні типи даних
-# typing.List[тип1 | тип2 | тип3]
-typing.List[int | float]
+
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+    def show(self):
+        print(f"Продукт {self.name} -- {self.price}грн")
 
 
+class Customer:
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
 
-# def func(param1: int, param2: typing.List[str]):
-#     for item in param2:
-#         item.
+    def deposit(self, total):
+        self.balance += total
 
-cat = Cat('Murchick', 3, 'black')
-num = 10
+    def withdraw(self, total):
+        self.balance -= total
 
-print(type(num))
-print(type(cat))
+
+class Cart:
+    def __init__(self, owner: Customer, items: typing.List[Product]):
+        self.owner = owner
+        self.items = items
+
+    def add_product(self, product: Product):
+        self.items.append(product)
+
+    def ckeckout(self):
+        for product in self.items:
+            price = product.price
+            self.owner.withdraw(price)
+
+        self.items = []
+
+    def show(self):
+        total = 0
+        for product in self.items:
+            price = product.price
+            total += price
+            product.show()
+
+        print(f"Загальна вартість {total}грн")
+
+
+#product = Product('milk', 70)
+
+# product = {
+#     "name": "milk",
+#     "price": 70
+# }
+
+customer = Customer("Mary", 5000)
+
+product1 = Product('milk', 70)
+product2 = Product('bread', 30)
+
+cart = Cart(customer, [product1, product2])
+
+cart.ckeckout()
+
+print(customer.balance)
+
+
