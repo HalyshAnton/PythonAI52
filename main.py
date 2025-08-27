@@ -93,47 +93,67 @@ class Cat:
 
     def catch_mouse(self):
         pass
+#
+#
+# class Dog:
+#     def __init__(self, name, age, speed):
+#         self.name = name
+#         self.age = age
+#         self.speed = speed
+#
+#     def make_sound(self):
+#         print('Гав')
+#
+#     def grow(self):
+#         self.age += 1
+#         self.speed -= 2
+#
+#
+# class Hamster:
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#
+#     def make_sound(self):
+#         print('Пі-пі')
+#
+#     def grow(self):
+#         self.age += 1
+#
+#
+# cat = Cat('Murchick', 3, 'black')
+# dog = Dog('Barsik', 2, 10)
+# hamster = Hamster('Benny', 4)
+#
+# pets = [cat, dog, hamster]
+#
+# # кожна тварина видає звуки
+# for pet in pets:
+#     pet.make_sound()
+#
+#
+# # model = NeuralNetwork()
+# #
+# # model.train(data)
 
 
-class Dog:
-    def __init__(self, name, age, speed):
-        self.name = name
-        self.age = age
-        self.speed = speed
+# typing
+import typing
 
-    def make_sound(self):
-        print('Гав')
+# typing.List[тип елементів]
 
-    def grow(self):
-        self.age += 1
-        self.speed -= 2
+# якщо може бути різні типи даних
+# typing.List[тип1 | тип2 | тип3]
+typing.List[int | float]
 
 
-class Hamster:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
 
-    def make_sound(self):
-        print('Пі-пі')
-
-    def grow(self):
-        self.age += 1
-
+# def func(param1: int, param2: typing.List[str]):
+#     for item in param2:
+#         item.
 
 cat = Cat('Murchick', 3, 'black')
-dog = Dog('Barsik', 2, 10)
-hamster = Hamster('Benny', 4)
+num = 10
 
-pets = [cat, dog, hamster]
-
-# кожна тварина видає звуки
-for pet in pets:
-    pet.make_sound()
-
-
-# model = NeuralNetwork()
-#
-# model.train(data)
-
-
+print(type(num))
+print(type(cat))
