@@ -1,243 +1,178 @@
-# class Project:
-#     def __init__(self, name: str, budget: int, tasks: list):
-#         self.name = name
-#         self.budget = budget
-#         self.tasks = tasks
-#
-#         self.expenses = 0
-#         self.is_finished = False
-#         self.time = 0
-#
-#     def show_info(self):
-#         """
-#         Показує інформацію про проект
-#         """
-#
-#         print()
-#         print(f"Інформація по проекту {self.name}")
-#         print(f'\t Бюджет -- {self.budget}грн')
-#         print(f"\t Використано -- {self.expenses}/{self.budget}")
-#         print(f"\t Час виконання -- {self.time} місяців")
-#
-#         if self.is_finished:
-#             print(f'\t Статус -- Завершений')
-#         else:
-#             print(f'\t Статус -- Незавершений')
-#
-#         print('\t Список задач:')
-#         for task in self.tasks:
-#             print(f"\t\t {task}")
-#
-#     def add_task(self, new_task):
-#         self.tasks.append(new_task)
-#         print(f"Додано нове завдання {new_task}")
-#
-#     def create_subtasks(self, old_task, subtasks):
-#         # чи є стара задачі в списку
-#         if old_task not in self.tasks:
-#             print(f"Такої задачі немає в списку")
-#             return
-#
-#         # old_task є в списку
-#         self.tasks.remove(old_task)
-#         self.tasks.extend(subtasks)  # добавити всі елементи з subtasks в список self.tasks
-#
-#         # # спосіб де багато відступів
-#         # if old_task in self.tasks:
-#         #     # old_task є в списку
-#         #     self.tasks.remove(old_task)
-#         #     self.tasks.extend(subtasks)  # добавити всі елементи з subtasks в список self.tasks
-#         # else:
-#         #     print(f"Такої задачі немає в списку")
-#
-#     def do_task(self, task, price, time):
-#         if task not in self.tasks:
-#             print(f"Такої задачі немає в списку")
-#             return
-#
-#         if price > (self.budget - self.expenses):
-#             print('Не вистачає коштів')
-#             return
-#
-#         # все добре, робимо задачу
-#         self.tasks.remove(task)
-#         self.expenses += price
-#         self.time += time
-#
-#         self.is_finished = len(self.tasks) == 0
-#
-#     def deposit(self, price):
-#         self.budget += price
-import typing
+# манічні методи
+
+nums = [1, 2, 3, 4]
+
+# явний метод(звичайний)
+nums.append(5)
+
+# магічній(викликається не явно(без прямої назви))
+10 in nums
+nums.__contains__(10)
+
+# num1 = 10
+# num1 + 5
+# res = num1.__add__(5)
+# print(res)
 
 
-# Інкапсуаляція
-
-# nums = [1, 2, 3, 4]
-# nums.append(5)
-
-
-# Поліморфізм
-
-
-class Cat:
-    def __init__(self, name, age, color):
-        self.name = name
-        self.age = age
-        self.color = color
-
-    def make_sound(self):
-        print('Мяу')
-
-    def grow(self):
-        self.age += 1
-
-    def catch_mouse(self):
-        pass
-#
-#
-# class Dog:
-#     def __init__(self, name, age, speed):
-#         self.name = name
-#         self.age = age
-#         self.speed = speed
-#
-#     def make_sound(self):
-#         print('Гав')
-#
-#     def grow(self):
-#         self.age += 1
-#         self.speed -= 2
-#
-#
-# class Hamster:
+# class Person:
 #     def __init__(self, name, age):
+#         print('hello from init')
 #         self.name = name
 #         self.age = age
 #
-#     def make_sound(self):
-#         print('Пі-пі')
+#     def __str__(self):  # заміняє операцію str(self)
+#         return f"{self.name}, {self.age} years"
+#
+#     def __eq__(self, other):  # self == other
+#         if isinstance(other, Person):
+#             print('Перевірка з Person')
+#             return self.name == other.name and self.age == other.age
+#
+#         elif isinstance(other, str):
+#             print('Перевірка з str')
+#             return self.name == other
+#
+#         else:
+#             return False
+#
+#     def __gt__(self, other):  # self > other
+#         if isinstance(other, Person):
+#             return self.age > other.age
+#
+#         else:
+#             return False
+#
+#     # def __lt__(self, other): # self < other
+#     #     pass
 #
 #     def grow(self):
 #         self.age += 1
 #
 #
-# cat = Cat('Murchick', 3, 'black')
-# dog = Dog('Barsik', 2, 10)
-# hamster = Hamster('Benny', 4)
+# # метод __init__
+# person1 = Person('Jhon', 37)
+# person2 = Person('Sophie', 40)
 #
-# pets = [cat, dog, hamster]
-#
-# # кожна тварина видає звуки
-# for pet in pets:
-#     pet.make_sound()
-#
-#
-# # model = NeuralNetwork()
+# # # __str__
+# # print(person1)
 # #
-# # model.train(data)
+# # info = str(person2)
+# # print(info)
+# #
+# # # __eq__
+# # print(person1 == person2)
+# #
+# # person3 = Person('Sophie', 40)
+# # print(person3 == person2)
+# #
+# # print(person1 == 'Jhon')
+# # # user = 'Jhon'
+# # # user.name
+# #
+# # print(person1 == 12)
+# #
+# #
+# # nums = [1, 2, 3]
+# # name = 'Jhon'
+# # print(nums == name)
+#
+# # __gt__
+#
+# if person1 > person2:
+#     print(f"{person1} старший/а за {person2}")
+# else:
+#     print(f"{person2} старший/а за {person1}")
+#
+#
+# person3 = Person('Mike', 21)
+#
+# people = [person1, person2, person3]
+#
+# # отримати найстаршк людину
+# max_person = max(people)
+# print(f"Найстарша людина: {max_person}")
+#
+# min_person = min(people)
+# print(f"Наймолодша людина: {min_person}")
 
-
-# # typing
-# import typing
-#
-# # typing.List[тип елементів]
-#
-# # якщо може бути різні типи даних
-# # typing.List[тип1 | тип2 | тип3]
-# typing.List[int | float]
-#
-#
-#
-# # def func(param1: int, param2: typing.List[str]):
-# #     for item in param2:
-# #         item.
-#
-# cat = Cat('Murchick', 3, 'black')
-# num = 10
-#
-# print(type(num))
-# print(type(cat))
-
-# Завдання 5. Онлайн-магазин
-# Створіть наступні класи:
-#
-# Product – атрибути name, price
-# Customer – атрибути name, balance
-# Cart – атрибути owner, items (список продуктів)
-#
-# Методи:
-#
-# add_product(product) – додає товар у кошик
-# checkout() – знімає з балансу покупця вартість усіх товарів (якщо грошей вистачає)
-# show_cart() – виводить список товарів і їх загальну вартість
-#
-# Напишіть функцію create_customer() та create_product(), які повертають об’єкти.
-# Створіть кілька товарів, покупців і дайте їм зробити покупки.
-
-
-class Product:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-
-    def show(self):
-        print(f"Продукт {self.name} -- {self.price}грн")
-
-
-class Customer:
-    def __init__(self, name, balance):
-        self.name = name
-        self.balance = balance
-
-    def deposit(self, total):
-        self.balance += total
-
-    def withdraw(self, total):
-        self.balance -= total
 
 
 class Cart:
-    def __init__(self, owner: Customer, items: typing.List[Product]):
-        self.owner = owner
-        self.items = items
-
-    def add_product(self, product: Product):
-        self.items.append(product)
-
-    def ckeckout(self):
-        for product in self.items:
-            price = product.price
-            self.owner.withdraw(price)
-
+    def __init__(self):
         self.items = []
 
-    def show(self):
-        total = 0
-        for product in self.items:
-            price = product.price
-            total += price
-            product.show()
+    def add_item(self, item):
+        self.items.append(item)
 
-        print(f"Загальна вартість {total}грн")
+    def __str__(self):
+        return f"Cart with {self.items}"
 
+    def __contains__(self, item):  # item in self
+        return item in self.items
 
-#product = Product('milk', 70)
+    def __getitem__(self, index):  # self[index]
+        return self.items[index]
 
-# product = {
-#     "name": "milk",
-#     "price": 70
-# }
+    def __len__(self):   # len(self)
+        return len(self.items)
 
-customer = Customer("Mary", 5000)
+    def generator(self):
+        for item in self.items:
+            yield item
 
-product1 = Product('milk', 70)
-product2 = Product('bread', 30)
-
-cart = Cart(customer, [product1, product2])
-
-cart.ckeckout()
-
-print(customer.balance)
+    def __iter__(self):
+        return iter(self.items)
 
 
+
+cart = Cart()
+
+cart.add_item("Milk")
+cart.add_item("Bread")
+cart.add_item("Butter")
+
+# print(cart)
+#
+#
+# # item in cart
+# print('Milk' in cart)
+# print('milk' in cart)
+#
+# # cart[2]
+# print(cart[1])
+#
+#
+# # len(cart)
+# print(len(cart))
+
+#print(cart == cart)
+
+range(10)
+'ghghjghkgj'
+[1, 2, 3, 4]
+{1, 2, 3, 4}
+{'one': 1, "two": 2}
+
+# звичайна функція
+def func(n):
+    for k in range(n):
+        return 2 ** k
+
+# фунція з багатьма результатами(генератор)
+def power2(n):
+    for k in range(n):
+        yield 2**k  #  повертає результат для for і працює далі
+
+
+# степені двійки
+# for num in power2(10):
+#     print(num)
+
+# print(cart)   #  str(cart)
+
+for item in cart:  # iter(cart)
+    # код для однієї ітерації
+    print(item)
+
+print(iter(cart))
