@@ -1,63 +1,65 @@
-# Наслідування(успадкування) класів
+# nums = [1, 2, 3, 4, 5, 6, 7, 8]
+#
+# nums.append(4)  # швидко
+# 10 in nums      # повільно
+#
+#
+# nums = {1, 2, 3, 4, 5}  # множина(set)
+# nums.add(4)   # швидко
+# 10 in nums    # швидко
+#
+#
+# 2 + 4 * 5 - (10 + 7)
 
-# батьківський клас
-# В ньому розписані спільні методи/атрибути для інших класів
-class Pet:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-    def sleep(self):
-        print(f'{self.name} спить')
-
-    def grow(self):
-        self.age += 1
-
-    def make_sound(self):
-        print('Якийсь звук')
-
-    def __str__(self):
-        return f"Name: {self.name}, age: {self.age} years"
-
-    def display_info(self):
-        print(f'Name -- {self.name}')
-        print(f'Age -- {self.age} years')
+# нотація O
+# використовується для приблизної оцінки кількості операцій
+# в задежночті від розміру вхідних даних(N)
+# Приклади що таке N:
+#    - кількість даних у базі даних(алгоритм пошуку/додавання елементів до списку)
+#    - число (алгоритму перевірки на простоту, обрахунок певної величини)
 
 
-# Дочірній клас -- клас який отрмує всі методи з батьківського
-# плюс власні методи
-# class ДочірнійКлас(БатківськийКлас)
-class Cat(Pet):
-    def __init__(self, name, age, weight):
-        # виклик батьківського init
-        super().__init__(name, age)
-
-        # нові атрибути
-        self.weight = weight
-
-
-    # перевантажений метод(він замінює однойменний з класу Pet)
-    def make_sound(self):  # метод з такою ж назвою як в Pet
-        print('Мяу')
-
-    # додати до батьківського методу додатковий функціонал
-    # display_info додатково показував що це кіт
-    def display_info(self):
-        print('Cat')  # додатковий функціонал
-
-        # запустити батківський метод(Pet.display_info)
-        super().display_info()
-        print(f'Weight -- {self.weight} kg')
+# O(1)  -- не залежить від N(не залежить від кількості даних)
+# O(log(N))  -- якщо дані збільшити в 2 разів то кількість операцій на 1
+# O(N)  -- кількість операцій приблизно дорівнює кількості даних
+# O(N^2)  -- якщо дані збільшити в 10 разів то кількість операцій зрости 100 разів
 
 
 
-cat = Cat('Том', 2, 3.5)
-cat.sleep()
-print(cat)
-cat.grow()
-print(cat)
-cat.make_sound()
+# Зв'язні списки
 
-cat.display_info()
+# клас для вузла
+class Node:
+    def __init__(self, value):
+        self.value = value   #  дані у вузлі
+        self.next = None     # посилання на наступний вузол
 
-print(Cat.__mro__)
+
+nums = [3, 7, 2, 5]
+
+# перший вузол
+node1 = Node(3)
+
+# другий вузол
+node2 = Node(7)
+
+# зв'язок між першим та другим вузлом
+node1.next = node2
+
+node3 = Node(2)
+node2.next = node3
+
+node4 = Node(5)
+node3.next = node4
+
+# пройтись по вузлах від першого до останнього
+
+temp_node = node1
+
+while temp_node is not None:
+    print(temp_node.value)
+    temp_node = temp_node.next
+
+
+
+
