@@ -1,214 +1,186 @@
-# # дерева
+# # пакування даних
 #
-# class Node:
-#     def __init__(self, data):
-#         self.data = data
-#         self.left = None
-#         self.right = None
+# # файлів
 #
+# filename = 'file.txt'
 #
-# class BinaryTree:
-#     def __init__(self):
-#         self.root = None  # корінь дерева
+# # записати інформацію у файл
+# with open(filename, 'w', encoding='utf-8') as file:
+#     file.write('[1, 245, 3]')
 #
-#     def add(self, data):
-#         node = Node(data)
+# # читання даних з файлу
+# with open(filename, 'r', encoding='utf-8') as file:
+#     data = file.read()
 #
-#         # дерево порожнє
-#         if self.root is None:
-#             self.root = node
-#             return
-#
-#         # вузол де робимо перевірку
-#         current_node = self.root
-#
-#         while True:
-#             # йдемо наліво
-#             if data < current_node.data:
-#                 # зліва вільне місце(вузла немає)
-#                 if current_node.left is None:
-#                     current_node.left = node
-#                     break
-#                 else:
-#                     # зліва зайнято(повторити перевірку знову)
-#                     current_node = current_node.left
-#
-#             elif data > current_node.data:  # йдемо направо
-#                 # справа вільне місце(вузла немає)
-#                 if current_node.right is None:
-#                     current_node.right = node
-#                     break
-#                 else:
-#                     current_node = current_node.right
-#
-#             else: # не можна добавляти дублікати
-#                 break
+# print(type(data))
+# print(data)
+
+# data = {
+#     "name": "John",
+#     "age": 25,
+#     "items": [
+#         "pen",
+#         "apple"
+#     ]
+# }
+
+# # JSON
+# import json
 #
 #
-#     def search(self, data):
-#         current_node = self.root
+# data = {
+#     "name": "Антон",
+#     "age": 25,
+#     "items": [
+#         "pen",
+#         "apple"
+#     ]
+# }
 #
-#         while current_node is not None:
-#             # вузол знайдено
-#             if current_node.data == data:
-#                 return True
+# # запис dump
+# with open('data.json', 'w', encoding='utf-8') as file:
+#     json.dump(data, file, indent=4)
 #
-#             elif data < current_node.data:
-#                 current_node = current_node.left
+# # читання даних load
+# with open('data.json', 'r', encoding='utf-8') as file:
+#     data: dict = json.load(file)
 #
-#             elif data > current_node.data:
-#                 current_node = current_node.right
-#
-#         # цикл зупинився -- значить даних в дереві немає
-#         return False
-#
-#     def min(self):
-#         current_node = self.root
-#
-#         while current_node.left is not None:
-#             current_node = current_node.left
-#
-#         return current_node.data
-#
-#     def print_inorder(self):
-#         self._inorder(self.root)
-#         print()
-#
-#     def _inorder(self, node):  # _ -- приватний метод класу
-#         if node.left:
-#             self._inorder(node.left)
-#
-#         print(node.data, end=' ')
-#
-#         if node.right:
-#             self._inorder(node.right)
-#
-#
-#
-# tree = BinaryTree()
-#
-# tree.add(5)
-# tree.add(7)
-# tree.add(3)
-# tree.add(8)
-# tree.add(4)
-# tree.add(6)
-#
-# print(tree.search(8))
-# print(tree.search(2))
-#
-# print(tree.min())
-#
-# tree.print_inorder()
-import bintrees
+# print(type(data))
+# print(data)
+# print(data['items'])
 
 
-# # AVL дерева
-# import bintrees
+# нюанси
+import json
+from xml.etree.ElementTree import indent
+
+# class Person:
+#     def __init__(self, name, age, items):
+#         self.name = name
+#         self.age = age
+#         self.items = items
 #
-# tree = bintrees.AVLTree()
+#     def method(self):
+#         pass
 #
-# # сортує значення по параметру key
-# tree.insert(key=8, value='John')
-# tree.insert(key=10, value='Maria')
+#     def save(self, filename):
+#         data = {
+#             'name': self.name,
+#             'age': self.age,
+#             'items': self.items
+#         }
+#
+#         with open(filename, 'w', encoding='utf-8') as file:
+#             json.dump(data, file, indent=4)
 #
 #
-# tree.remove(8)
+# person = Person('Mary', 34, ['baggage', 'hljh'])
 #
-# # отримати значення(перевірка)
+# with open('data.json', 'w', encoding='utf-8') as file:
+#     json.dump(person, file, indent=4)
 #
-# if 10 in tree:
-#     print(tree[10])
+# person.method()
+
+# data = {1, 2, 3, 4, 5}
+# data = list(data)
+#
+# # запис dump
+# with open('data.json', 'w', encoding='utf-8') as file:
+#     json.dump(data, file, indent=4)
+#
+# # читання даних load
+# with open('data.json', 'r', encoding='utf-8') as file:
+#     data: dict = json.load(file)
+#
+# print(type(data))
+# print(data)
+
+# # функції dumps loads
+# data = {
+#     "name": "John",
+#     "age": 25,
+#     "items": [
+#         "pen",
+#         "apple"
+#     ]
+# }
+#
+# data_encoded = json.dumps(data)
+#
+# print(type(data_encoded))
+# print(repr(data_encoded))  # repr -- щоб побачити як у коді
+#
+# data_decoded = json.loads(data_encoded)
+#
+# print(type(data_decoded))
+# print(repr(data_decoded))
 
 
-
-# Завдання:
-#
-# Створити бінарне дерево для каталогу книг у бібліотеці.
-#
-# Операції:
-#
-# Insert: Додавання нової книги в каталог з вказаною назвою та іншою інформацією (автор, рік видання, жанр тощо).
-#
-# Search: Пошук книги за назвою або іншими параметрами. Пошук повинен повертати усю інформацію, що стосується цієї книги.
-#
-# Delete: Видалення книги з каталогу за назвою або іншими параметрами.
-#
-# Display: Виведення всього каталогу книг за зростанням або спаданням алфавіту за назвою.
-#
-# Count: Підрахунок кількості книг у бібліотеці.
-#
-# Властивості:
-#
-# Зберігання: Книги зберігаються за алфавітом за назвою книги.
-#
-# Пошук: Користувач може шукати книгу за назвою або іншою інформацією про книгу.
-#
-# Видалення: Користувач може видаляти книгу з каталогу за назвою або іншими параметрами.
-#
-# Показ каталогу: Виведення всіх книг у вигляді списку, відсортованого за назвою книги.
-#
-# Статистика: Виведення загальної кількості книг у бібліотеці.
-#
-# Приклад використання:
-#
-
-class Book:
-    def __init__(self, name, author, year, style):
-        self.name = name
-        self.year = year
-        self.author = author
-        self.style = style
-
-    def __str__(self):
-        return f"Book\n\tauthor\t{self.author}\n\tname\t{self.name}\n\tyear\t{self.year}\n\tstyle\t{self.style}"
+# Користувач вводить назву та ціну продукту. Добавте їх у кошик
+# Також збережіть дані у файл
 
 
-class BinaryTreeLibrary():
-    def __init__(self):
-        self.books_tree = bintrees.AVLTree()
+def add_item(cart):
+    name = input("Введіть назву товару: ")
+    price = int(input("Введіть ціну товару: "))
 
-    # Insert: Додавання нової книги в каталог з вказаною назвою та іншою інформацією(автор, ріквидання, жанртощо).
-    def insert(self, name, author, year, style):
-        book = Book(name, author, year, style)
-        self.books_tree.insert(key=name, value=book)
+    item_info = {
+        'name': name,
+        'price': price
+    }
 
-    # Search: Пошук книги за назвою або іншими параметрами. Пошук повинен повертати усю інформацію, що стосується цієї книги.
-    def search(self, name):
-        if name in self.books_tree:
-            book = self.books_tree[name]
-            print(book)
-
-    # Delete: Видалення книги з каталогу за назвою або іншими параметрами.
-    def delete(self, name):
-        if name in self.books_tree:
-            self.books_tree.remove(name)
-
-    # Display: Виведення всього каталогу книг за зростанням або спаданням алфавіту за назвою.
-    def display(self):
-        for name in self.books_tree:
-            print(self.books_tree[name])
-
-    # Count: Підрахунок кількості книг у бібліотеці.
-    def count(self):
-        return len(self.books_tree)
+    cart.append(item_info)
 
 
-library = BinaryTreeLibrary()
+def save_cart(cart, filename='cart.json'):
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(cart, file, indent=4)
 
-library.insert("1984", "George Orwell", 1949, "Dystopian Fiction")
-library.insert("To Kill a Mockingbird", "Harper Lee", 1960, "Classic Fiction")
-library.insert("Pride and Prejudice", "Jane Austen", 1813, "Romance")
 
-print("Books in library:")
-library.display()
+def load_cart(filename='cart.json'):
+    with open(filename, 'r', encoding='utf-8') as file:
+        cart = json.load(file)
 
-print("\nSearching for '1984':")
-library.search("1984")
+    return cart
 
-library.delete("To Kill a Mockingbird")
-print("\nBooks in library after deletion:")
-library.display()
 
-print("\nTotal number of books:", library.count())
+def display_cart(cart):
+    print(json.dumps(cart, indent=2))
 
+
+def main():
+    print("Робота з кошиком")
+
+    cart = [] # кошик з товарами
+
+    while True:
+        print()
+        print('1 - додати товар')
+        print('2 - зберегти кошик')
+        print('3 - завантажити збережений кошик')
+        print('4 - показати кошик')
+        print('5 - завершити програму')
+
+        choice = input("Введіть номер команди: ")
+
+        if choice == '1':
+            add_item(cart)
+
+        elif choice == '2':
+            save_cart(cart)
+
+        elif choice == '3':
+            cart = load_cart()
+
+        elif choice == '4':
+            display_cart(cart)
+
+        elif choice == '5':
+            break
+
+        else:
+            print("Невірна команда")
+
+
+if __name__ == '__main__':
+    main()
