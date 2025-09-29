@@ -1,186 +1,288 @@
-# # пакування даних
+# # формат JSON(словники)
 #
-# # файлів
+# # data = {
+# #     "name": "Anton",
+# #     "age": 23
+# # }
+# #
+# # data['age']
 #
-# filename = 'file.txt'
-#
-# # записати інформацію у файл
-# with open(filename, 'w', encoding='utf-8') as file:
-#     file.write('[1, 245, 3]')
-#
-# # читання даних з файлу
-# with open(filename, 'r', encoding='utf-8') as file:
-#     data = file.read()
-#
-# print(type(data))
-# print(data)
-
-# data = {
-#     "name": "John",
-#     "age": 25,
-#     "items": [
-#         "pen",
-#         "apple"
-#     ]
+# user1_name = 'Jhon'
+# user1_data = {
+#     'wins': 4,
+#     'loses': 2
 # }
+#
+# user2_name = 'Mary'
+# user2_data = {
+#     'wins': 6,
+#     'loses': 0
+# }
+#
+# user3_name = 'Mike'
+# user3_data = {
+#     'wins': 1,
+#     'loses': 5
+# }
+#
+# data = [
+#     {
+#         'name': 'Jhon',
+#         'game_results': {
+#             'wins': 4,
+#             'loses': 2
+#         }
+#     },
+#
+#     {
+#         'name': 'Mary',
+#         'game_results': {
+#             'wins': 6,
+#             'loses': 0
+#         }
+#     }
+# ]
+#
+# # отримати кількість перемог  для гравця з індексом 0
+# print(data[0]['game_results']['wins'])
+#
+# data = {
+#   "gt_parse": {
+#     "menu": [
+#       {
+#         "nm": "Nasi Campur Bali",
+#         "cnt": "1 x",
+#         "price": "75,000"
+#       },
+#       {
+#         "nm": "Bbk Bengil Nasi",
+#         "cnt": "1 x",
+#         "price": "125,000"
+#       },
+#       {
+#         "nm": "MilkShake Starwb",
+#         "cnt": "1 x",
+#         "price": "37,000"
+#       },
+#       {
+#         "nm": "Ice Lemon Tea",
+#         "cnt": "1 x",
+#         "price": "24,000"
+#       },
+#       {
+#         "nm": "Nasi Ayam Dewata",
+#         "cnt": "1 x",
+#         "price": "70,000"
+#       },
+#       {
+#         "nm": "Free Ice Tea",
+#         "cnt": "3 x",
+#         "price": "0"
+#       },
+#       {
+#         "nm": "Organic Green Sa",
+#         "cnt": "1 x",
+#         "price": "65,000"
+#       },
+#       {
+#         "nm": "Ice Tea",
+#         "cnt": "1 x",
+#         "price": "18,000"
+#       },
+#       {
+#         "nm": "Ice Orange",
+#         "cnt": "1 x",
+#         "price": "29,000"
+#       },
+#       {
+#         "nm": "Ayam Suir Bali",
+#         "cnt": "1 x",
+#         "price": "85,000"
+#       },
+#       {
+#         "nm": "Tahu Goreng",
+#         "cnt": "2 x",
+#         "price": "36,000"
+#       },
+#       {
+#         "nm": "Tempe Goreng",
+#         "cnt": "2 x",
+#         "price": "36,000"
+#       },
+#       {
+#         "nm": "Tahu Telor Asin",
+#         "cnt": "1 x",
+#         "price": "40,000."
+#       },
+#       {
+#         "nm": "Nasi Goreng Samb",
+#         "cnt": "1 x",
+#         "price": "70,000"
+#       },
+#       {
+#         "nm": "Bbk Panggang Sam",
+#         "cnt": "3 x",
+#         "price": "366,000"
+#       },
+#       {
+#         "nm": "Ayam Sambal Hija",
+#         "cnt": "1 x",
+#         "price": "92,000"
+#       },
+#       {
+#         "nm": "Hot Tea",
+#         "cnt": "2 x",
+#         "price": "44,000"
+#       },
+#       {
+#         "nm": "Ice Kopi",
+#         "cnt": "1 x",
+#         "price": "32,000"
+#       },
+#       {
+#         "nm": "Tahu Telor Asin",
+#         "cnt": "1 x",
+#         "price": "40,000"
+#       },
+#       {
+#         "nm": "Free Ice Tea",
+#         "cnt": "1 x",
+#         "price": "0"
+#       },
+#       {
+#         "nm": "Bebek Street",
+#         "cnt": "1 x",
+#         "price": "44,000"
+#       },
+#       {
+#         "nm": "Ice Tea Tawar",
+#         "cnt": "1 x",
+#         "price": "18,000"
+#       }
+#     ],
+#     "sub_total": {
+#       "subtotal_price": "1,346,000",
+#       "service_price": "100,950",
+#       "tax_price": "144,695",
+#       "etc": "-45"
+#     },
+#     "total": {
+#       "total_price": "1,591,600"
+#     }
+#   },
+#   "meta": {
+#     "version": "2.0.0",
+#     "split": "train",
+#     "image_id": 0,
+#     "image_size": {
+#       "width": 864,
+#       "height": 1296
+#     }
+#   }
+# }
+#
+# # отримати список ключів
+# print(list(data.keys()))
+#
+# # отриати дані парсингу
+# parse_data = data['gt_parse']
+#
+# print(list(parse_data.keys()))
+#
+# # дані про зігільну ціну
+# sub_total_data = parse_data['sub_total']
+#
+# print(list(sub_total_data.keys()))
+#
+# # податки
+# print(sub_total_data['tax_price'])
+#
+# # теж саме але одразу
+# print(data['gt_parse']['sub_total']['tax_price'])
+#
+# # pydantic
 
-# # JSON
+# pickle
 # import json
 #
 #
 # data = {
-#     "name": "Антон",
-#     "age": 25,
-#     "items": [
-#         "pen",
-#         "apple"
-#     ]
+#     'name': 'Sophie',
+#     'age': 42
 # }
 #
-# # запис dump
-# with open('data.json', 'w', encoding='utf-8') as file:
-#     json.dump(data, file, indent=4)
+# with open('data.json', 'w') as file:
+#     json.dump(data, file)
 #
-# # читання даних load
-# with open('data.json', 'r', encoding='utf-8') as file:
-#     data: dict = json.load(file)
 #
-# print(type(data))
+# with open('data.json', 'r') as file:
+#     new_data = json.load(file)
+#
+#
+# print(new_data)
+#
+#
+# # дані зберігаються як str рядки
+# encoded = json.dumps(data)
+# print(encoded)
+# print(type(encoded))
+
+
+#pickle зберігання даних як байти
+
+import pickle
+
+
+# data = {
+#     'name': 'Sophie',
+#     'age': 42
+# }
+#
+# encoded = pickle.dumps(data)
 # print(data)
-# print(data['items'])
-
-
-# нюанси
-import json
-from xml.etree.ElementTree import indent
-
-# class Person:
-#     def __init__(self, name, age, items):
+# print(encoded)
+# print(type(encoded))
+#
+#
+# class Person():
+#     def __init__(self, name, age):
 #         self.name = name
 #         self.age = age
-#         self.items = items
-#
-#     def method(self):
-#         pass
-#
-#     def save(self, filename):
-#         data = {
-#             'name': self.name,
-#             'age': self.age,
-#             'items': self.items
-#         }
-#
-#         with open(filename, 'w', encoding='utf-8') as file:
-#             json.dump(data, file, indent=4)
 #
 #
-# person = Person('Mary', 34, ['baggage', 'hljh'])
-#
-# with open('data.json', 'w', encoding='utf-8') as file:
-#     json.dump(person, file, indent=4)
-#
-# person.method()
+# person = Person('Jhon', 35)
+# encoded = pickle.dumps(person)
+# print(person)
+# print(encoded)
+# print(type(encoded))
 
-# data = {1, 2, 3, 4, 5}
-# data = list(data)
-#
-# # запис dump
-# with open('data.json', 'w', encoding='utf-8') as file:
-#     json.dump(data, file, indent=4)
-#
-# # читання даних load
-# with open('data.json', 'r', encoding='utf-8') as file:
-#     data: dict = json.load(file)
-#
-# print(type(data))
-# print(data)
-
-# # функції dumps loads
-# data = {
-#     "name": "John",
-#     "age": 25,
-#     "items": [
-#         "pen",
-#         "apple"
-#     ]
-# }
-#
-# data_encoded = json.dumps(data)
-#
-# print(type(data_encoded))
-# print(repr(data_encoded))  # repr -- щоб побачити як у коді
-#
-# data_decoded = json.loads(data_encoded)
-#
-# print(type(data_decoded))
-# print(repr(data_decoded))
+# робота з файлами
+import json
 
 
-# Користувач вводить назву та ціну продукту. Добавте їх у кошик
-# Також збережіть дані у файл
+data = {
+    'name': 'Sophie',
+    'age': 42
+}
+
+class Person():
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def info(self):
+        print(f"Person: {self.name}, {self.age} yr")
+
+person = Person('Mike', 16)
 
 
-def add_item(cart):
-    name = input("Введіть назву товару: ")
-    price = int(input("Введіть ціну товару: "))
 
-    item_info = {
-        'name': name,
-        'price': price
-    }
-
-    cart.append(item_info)
+with open('data.pkl', 'wb') as file:
+    pickle.dump(person, file)
 
 
-def save_cart(cart, filename='cart.json'):
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(cart, file, indent=4)
+with open('data.pkl', 'rb') as file:
+    new_data = pickle.load(file)
 
 
-def load_cart(filename='cart.json'):
-    with open(filename, 'r', encoding='utf-8') as file:
-        cart = json.load(file)
-
-    return cart
-
-
-def display_cart(cart):
-    print(json.dumps(cart, indent=2))
-
-
-def main():
-    print("Робота з кошиком")
-
-    cart = [] # кошик з товарами
-
-    while True:
-        print()
-        print('1 - додати товар')
-        print('2 - зберегти кошик')
-        print('3 - завантажити збережений кошик')
-        print('4 - показати кошик')
-        print('5 - завершити програму')
-
-        choice = input("Введіть номер команди: ")
-
-        if choice == '1':
-            add_item(cart)
-
-        elif choice == '2':
-            save_cart(cart)
-
-        elif choice == '3':
-            cart = load_cart()
-
-        elif choice == '4':
-            display_cart(cart)
-
-        elif choice == '5':
-            break
-
-        else:
-            print("Невірна команда")
-
-
-if __name__ == '__main__':
-    main()
+print(new_data.info())
