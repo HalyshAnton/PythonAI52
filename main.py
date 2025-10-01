@@ -1,288 +1,145 @@
-# # формат JSON(словники)
+# # дз
 #
-# # data = {
-# #     "name": "Anton",
-# #     "age": 23
-# # }
-# #
-# # data['age']
+# def add_album(bands: dict, band: str, album: str) -> None:
+#     """Додати новий альбом до гурту."""
+#     if band not in bands:
+#         print(f"Гурт '{band}' не знайдено!")
+#         return
 #
-# user1_name = 'Jhon'
-# user1_data = {
-#     'wins': 4,
-#     'loses': 2
-# }
+#     if album in bands[band]:
+#         print(f"Альбом '{album}' вже є у гурта '{band}'!")
+#         return
 #
-# user2_name = 'Mary'
-# user2_data = {
-#     'wins': 6,
-#     'loses': 0
-# }
-#
-# user3_name = 'Mike'
-# user3_data = {
-#     'wins': 1,
-#     'loses': 5
-# }
-#
-# data = [
-#     {
-#         'name': 'Jhon',
-#         'game_results': {
-#             'wins': 4,
-#             'loses': 2
-#         }
-#     },
-#
-#     {
-#         'name': 'Mary',
-#         'game_results': {
-#             'wins': 6,
-#             'loses': 0
-#         }
-#     }
-# ]
-#
-# # отримати кількість перемог  для гравця з індексом 0
-# print(data[0]['game_results']['wins'])
-#
-# data = {
-#   "gt_parse": {
-#     "menu": [
-#       {
-#         "nm": "Nasi Campur Bali",
-#         "cnt": "1 x",
-#         "price": "75,000"
-#       },
-#       {
-#         "nm": "Bbk Bengil Nasi",
-#         "cnt": "1 x",
-#         "price": "125,000"
-#       },
-#       {
-#         "nm": "MilkShake Starwb",
-#         "cnt": "1 x",
-#         "price": "37,000"
-#       },
-#       {
-#         "nm": "Ice Lemon Tea",
-#         "cnt": "1 x",
-#         "price": "24,000"
-#       },
-#       {
-#         "nm": "Nasi Ayam Dewata",
-#         "cnt": "1 x",
-#         "price": "70,000"
-#       },
-#       {
-#         "nm": "Free Ice Tea",
-#         "cnt": "3 x",
-#         "price": "0"
-#       },
-#       {
-#         "nm": "Organic Green Sa",
-#         "cnt": "1 x",
-#         "price": "65,000"
-#       },
-#       {
-#         "nm": "Ice Tea",
-#         "cnt": "1 x",
-#         "price": "18,000"
-#       },
-#       {
-#         "nm": "Ice Orange",
-#         "cnt": "1 x",
-#         "price": "29,000"
-#       },
-#       {
-#         "nm": "Ayam Suir Bali",
-#         "cnt": "1 x",
-#         "price": "85,000"
-#       },
-#       {
-#         "nm": "Tahu Goreng",
-#         "cnt": "2 x",
-#         "price": "36,000"
-#       },
-#       {
-#         "nm": "Tempe Goreng",
-#         "cnt": "2 x",
-#         "price": "36,000"
-#       },
-#       {
-#         "nm": "Tahu Telor Asin",
-#         "cnt": "1 x",
-#         "price": "40,000."
-#       },
-#       {
-#         "nm": "Nasi Goreng Samb",
-#         "cnt": "1 x",
-#         "price": "70,000"
-#       },
-#       {
-#         "nm": "Bbk Panggang Sam",
-#         "cnt": "3 x",
-#         "price": "366,000"
-#       },
-#       {
-#         "nm": "Ayam Sambal Hija",
-#         "cnt": "1 x",
-#         "price": "92,000"
-#       },
-#       {
-#         "nm": "Hot Tea",
-#         "cnt": "2 x",
-#         "price": "44,000"
-#       },
-#       {
-#         "nm": "Ice Kopi",
-#         "cnt": "1 x",
-#         "price": "32,000"
-#       },
-#       {
-#         "nm": "Tahu Telor Asin",
-#         "cnt": "1 x",
-#         "price": "40,000"
-#       },
-#       {
-#         "nm": "Free Ice Tea",
-#         "cnt": "1 x",
-#         "price": "0"
-#       },
-#       {
-#         "nm": "Bebek Street",
-#         "cnt": "1 x",
-#         "price": "44,000"
-#       },
-#       {
-#         "nm": "Ice Tea Tawar",
-#         "cnt": "1 x",
-#         "price": "18,000"
-#       }
-#     ],
-#     "sub_total": {
-#       "subtotal_price": "1,346,000",
-#       "service_price": "100,950",
-#       "tax_price": "144,695",
-#       "etc": "-45"
-#     },
-#     "total": {
-#       "total_price": "1,591,600"
-#     }
-#   },
-#   "meta": {
-#     "version": "2.0.0",
-#     "split": "train",
-#     "image_id": 0,
-#     "image_size": {
-#       "width": 864,
-#       "height": 1296
-#     }
-#   }
-# }
-#
-# # отримати список ключів
-# print(list(data.keys()))
-#
-# # отриати дані парсингу
-# parse_data = data['gt_parse']
-#
-# print(list(parse_data.keys()))
-#
-# # дані про зігільну ціну
-# sub_total_data = parse_data['sub_total']
-#
-# print(list(sub_total_data.keys()))
-#
-# # податки
-# print(sub_total_data['tax_price'])
-#
-# # теж саме але одразу
-# print(data['gt_parse']['sub_total']['tax_price'])
-#
-# # pydantic
-
-# pickle
-# import json
+#     bands[band].append(album)
 #
 #
-# data = {
-#     'name': 'Sophie',
-#     'age': 42
-# }
-#
-# with open('data.json', 'w') as file:
-#     json.dump(data, file)
-#
-#
-# with open('data.json', 'r') as file:
-#     new_data = json.load(file)
-#
-#
-# print(new_data)
-#
-#
-# # дані зберігаються як str рядки
-# encoded = json.dumps(data)
-# print(encoded)
-# print(type(encoded))
+# text = '   \n  '
+# # text.strip() == ''
+import threading
+import time
 
 
-#pickle зберігання даних як байти
-
-import pickle
-
-
-# data = {
-#     'name': 'Sophie',
-#     'age': 42
-# }
-#
-# encoded = pickle.dumps(data)
-# print(data)
-# print(encoded)
-# print(type(encoded))
+# # багато потоковість
+# import time
 #
 #
-# class Person():
-#     def __init__(self, name, age):
-#         self.name = name
-#         self.age = age
+# def func1():
+#     print("Початок функції 1")
+#     time.sleep(0.5)
+#     total = 0
+#     for num  in range(1, 1000):
+#         total += num
+#
+#     print(total)
+#     print("Кінець функції 1")
 #
 #
-# person = Person('Jhon', 35)
-# encoded = pickle.dumps(person)
-# print(person)
-# print(encoded)
-# print(type(encoded))
+# def func2():
+#     print("Початок функції 2")
+#     time.sleep(0.5)
+#     count15 = 0
+#     for num in range(1, 1000):
+#         if num % 15:
+#             count15 += 1
+#
+#     print(count15)
+#     print("Кінець функції 2")
+#
+#
+# # без потоків
+# start = time.time()
+# func1()
+# func2()
+# end = time.time()
+#
+# print(f"Час без потоків -- {end - start} сек")
+# print()
+#
+#
+# # з потоками
+#
+# import threading
+#
+# # потік для функції 1
+# thread1 = threading.Thread(target=func1)
+#
+# # потік для функції 2
+# thread2 = threading.Thread(target=func2)
+#
+# # запуск потоків
+# start = time.time()
+# thread1.start()
+# thread2.start()
+#
+# # дочекатись  закінчення потоків
+# thread1.join()
+# thread2.join()
+#
+# end = time.time()
+#
+# print(f"Час з потоками -- {end - start} сек")
 
-# робота з файлами
-import json
+
+# # функції з параметрами
+# def func1(text, num):
+#     for _ in range(num):
+#         print(text + '\n', end='')
+#
+#
+# def func2(nums):
+#     print(f"{sorted(nums)}\n", end='')
+#
+#
+# nums = [1, 4, 3, 2, 5, 3, 5, 3, 4, 6, 4, 7, 8, 9, 0, 0]
+#
+# # потік для функції 1 з параметрами "hello" 20
+# thread1 = threading.Thread(target=func1, args=("hello", 20))
+#
+# # потік для функції 2 з параметрами nums
+# thread2 = threading.Thread(target=func2, args=(nums, ))
+#
+# # потік для функції 1 у форматі func1('long text', num=10)
+# thread3 = threading.Thread(target=func1,
+#                            args=("long text",),
+#                            kwargs={"num": 10}
+#                            )
+#
+# thread1.start()
+# thread2.start()
+# thread3.start()
 
 
-data = {
-    'name': 'Sophie',
-    'age': 42
-}
+# є список задач, які виконують декілька потоків
+# результати треба записати у спільний файл
+from threading import Lock
 
-class Person():
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-    def info(self):
-        print(f"Person: {self.name}, {self.age} yr")
-
-person = Person('Mike', 16)
+locker = Lock()
 
 
+def do_task(tasks, thread_num, locker):
+    while True:
+        # кажемо іншим потокам зупинитися
+        locker.acquire()
 
-with open('data.pkl', 'wb') as file:
-    pickle.dump(person, file)
+        if not tasks:
+            print(f"Потік{thread_num} закінчив роботу")
+            return
+
+        task = tasks.pop()
+
+        with open("logging.txt", 'a', encoding='utf-8') as file:
+            print(f"Потік{thread_num} виконав задачу {task}", file=file)
+
+        # інші потоки можуть продовжувати
+        locker.release()
 
 
-with open('data.pkl', 'rb') as file:
-    new_data = pickle.load(file)
+tasks = list(range(1, 10))
 
+threads = []
+for i in range(20):
+    thread = threading.Thread(target=do_task, args=(tasks, i, locker))
+    threads.append(thread)
 
-print(new_data.info())
+for thread in threads:
+    thread.start()
