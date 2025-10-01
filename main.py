@@ -123,15 +123,16 @@ def do_task(tasks, thread_num, locker):
 
         if not tasks:
             print(f"Потік{thread_num} закінчив роботу")
+            locker.release()
             return
 
         task = tasks.pop()
 
-        with open("logging.txt", 'a', encoding='utf-8') as file:
-            print(f"Потік{thread_num} виконав задачу {task}", file=file)
-
         # інші потоки можуть продовжувати
         locker.release()
+
+        with open("logging.txt", 'a', encoding='utf-8') as file:
+            print(f"Потік{thread_num} виконав задачу {task}", file=file)
 
 
 tasks = list(range(1, 10))
