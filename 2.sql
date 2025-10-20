@@ -74,28 +74,10 @@ INSERT INTO ANIMALS (BREED, AGE, COLOR) VALUES
 --- ЗАПИТИ
 
 -- ОТРИМАТИ ВСЮ ТАБЛИЦЮ
-SELECT *  -- СТВОПЧИКИ ЯКІ ПОКАЗАТИ, ЯКЩО ПОКАЗАТИ ТРЕБА ВСІ -- *
-FROM ANIMALS;
+SELECT *  -- СТВОПЧИКИ ЯКІ ПОК
 
 
--- ОТРИМАТИ ЛИШЕ СТОВПЧИКИ BREED AGE
-SELECT BREED, AGE
-FROM ANIMALS;
 
--- ОТРИМАТИ СТОВПЧИК BREED, АЛЕ ЛИШЕ УНІКАЛЬНІ ЗНАЧЕННЯ
-SELECT DISTINCT BREED
-FROM ANIMALS;
-
---- ВИВЕСТИ ЛИШЕ КОТІВ
-SELECT *
-FROM ANIMALS
-WHERE BREED = 'Кіт';
-
-
---- ОТРИМАТИ ТВАРИН МОЛОДШИХ ЗА 2 РОКИ
-SELECT *
-FROM ANIMALS
-WHERE AGE < 2;
 
 
 
