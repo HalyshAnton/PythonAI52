@@ -101,6 +101,39 @@ def show_table(table_name):
         print()
 
 # ■ Вставляти рядки в таблиці бази даних.
+def insert_row(table_name):
+    table = tables[table_name]
+    column_names = table.columns.keys()
+
+    values = {}
+    for column in column_names:
+        if column == 'id':
+            continue
+        user_input = input(f"Введiть значення для {column}: ")
+        values[column] = user_input
+
+    columns_str = ', '.join(values.keys())
+    values_str = ', '.join([f"'{v}'" for v in values.values()])
+
+    query_text = f"""
+    INSERT INTO {table_name} ({columns_str})
+    VALUES ({values_str})
+    """
+
+    query_text = text(query_text)
+    session.execute(query_text)
+    session.commit()  # залити зміни на сервер
+
+    print("Дані додані успішно")
+
+    # print(query_text)
+    #
+    # print(values)
+    # print(columns_str)
+    # print(values_str)
+
+
+insert_row('doctors')
 # ■ Оновлення рядків у таблицях бази даних. При спробі
 # оновлення усіх рядків в одній таблиці надайте запит на
 # підтвердження користувачеві. Оновлювати усі рядки
