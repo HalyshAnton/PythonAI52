@@ -163,3 +163,4 @@ cython_debug/
 random_generator.py
 students.csv
 
+credentials.json
