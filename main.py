@@ -1,52 +1,63 @@
-# серверне програмування
+# підключення до бази даних в postgresql через sqlalchemy
+from sqlalchemy import create_engine, text, MetaData
+from sqlalchemy.orm import sessionmaker
 
-# https://www.google.com/search&q=java
-
-
-from fastapi import FastAPI
-
-
-# застосонук для сервера
-# допомагає позначити як отримати доступ до окремих функцій на сервері
-
-# коли робитиметься виклик до серверра
-# http:our_ip/шлях до функції
-app = FastAPI()
-
-# створення функцій
-@app.post('/message')
-def message():
-    print("виклик функції message")
+import json
 
 
-@app.post('/function')
-def func():
-    print("Виклик функції func")
+with open('credentials.json') as file:
+    data = json.load(file)
+    login = data['login']
+    password = data['password']
 
+DATABASE_URL = f"postgresql+pg8000://{login}:{password}@localhost/hospital"
+engine = create_engine(DATABASE_URL)
 
-# функція яка повертає результат
-# формат Json
+# клас для створення сесій
+Session = sessionmaker(bind=engine)
 
-# @app.post("/data")
-# def get_data():
-#     return {"result": "Привіт від сервера"}
+#конкретна сесія
+session = Session()
 
+# отримання таблиць з бази даних
 
-# передача параметрів
-# параметри як чатина шляху
-# як правило працює для одного параметра
+metadata = MetaData()
+metadata.reflect(bind=engine)
 
-@app.post("/mult2/{num}")
-def mult2(num: int):
-    result = 2 * num
-    return {'result': result}
+tables = metadata.tables # словник з таблицями бази даних
 
+# for table_name in tables:
+#     print(table_name)
+#     print(tables[table_name].columns)
+#     print('-'*20)
 
-# функція для реєстрації користувачів
-# отримує щось типу
-{
-    'user_name': 'Jhon',
-    "login": "jhon45678",
-    'password': '123qwer',
-    'age': 45
-}
+# виконання простого запиту
+
+query_text = """
+SELECT *
+FROM DOCTORS
+WHERE SALARY > 90000
+"""
+
+# переведення запиту в правильний формат
+query_text = text(query_text)
+
+query = session.execute(query_text)
+
+# вказуємо які результати(рядки) ми хочемо отримати
+# всі результати
+# первий результат
+# перші n результатів
+# останні n результатів
+
+results = query.all()
+
+# приклад отримання назв колонок таблиці doctors
+doctors = tables['doctors']
+column_names = doctors.columns.keys()
+print(column_names)
+
+for row in results:
+    print(row)
+
+print(results)
