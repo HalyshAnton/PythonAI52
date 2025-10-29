@@ -1,144 +1,66 @@
-# підключення до бази даних в postgresql через sqlalchemy
-from sqlalchemy import create_engine, text, MetaData
-from sqlalchemy.orm import sessionmaker
-
-import json
+import redis
+import base64
 
 
-with open('credentials.json') as file:
-    data = json.load(file)
-    login = data['login']
-    password = data['password']
+class SocialApp:
+    def __init__(self):
+        self.server = redis.Redis(host='localhost', # адреса бази даних
+                                  port=6379,   #  порт
+                                  decode_responses=True  # не повертати байти
+                                  )
 
-DATABASE_URL = f"postgresql+pg8000://{login}:{password}@localhost/hospital"
-engine = create_engine(DATABASE_URL)
+        # активний користувач(поки невідомий)
+        self.current_user = None
 
-# клас для створення сесій
-Session = sessionmaker(bind=engine)
+    # ■ додати користувача;
+    def _get_password_key(self, username):
+        return f'password:{username}'
 
-#конкретна сесія
-session = Session()
+    def add_user(self, username, password):
+        # отримати ключ для сервера
+        password_key = self._get_password_key(username)
 
-# отримання таблиць з бази даних
+        # перевірка чи користувач вже є
+        if self.server.exists(password_key):
+            print('такий користувач вже є')
+            return
 
-metadata = MetaData()
-metadata.reflect(bind=engine)
+        # кодування пароля для безпеки
+        encoded_password = base64.b64encode(password.encode("utf-8"))
 
-tables = metadata.tables # словник з таблицями бази даних
+        self.server.set(password_key, encoded_password)
 
-# for table_name in tables:
-#     print(table_name)
-#     print(tables[table_name].columns)
-#     print('-'*20)
+        # password:Anton - 86435145
+        # password:Sophie - 78643134
 
-# виконання простого запиту
+    # вхід за логіном і паролем;
+    def login(self, username, password):
+        password_key = self._get_password_key(username)
 
-# query_text = """
-# SELECT *
-# FROM DOCTORS
-# WHERE SALARY > 90000
-# """
-#
-# # insert_query = f"""
-# # INSERT INTO DOCTORS (FIRST_NAME, LAST_NAME, SPECIALTY, SALARY)
-# # VALUES ('{user}', '{surname}', 'Терапевт', 85000)
-# # """
-#
-# # переведення запиту в правильний формат
-# query_text = text(query_text)
-#
-# query = session.execute(query_text)
-#
-# # вказуємо які результати(рядки) ми хочемо отримати
-# # всі результати
-# # первий результат
-# # перші n результатів
-# # останні n результатів
-#
-# results = query.all()
-#
-# # приклад отримання назв колонок таблиці doctors
-# doctors = tables['doctors']
-# column_names = doctors.columns.keys()
-# print(column_names)
-#
-# for row in results:
-#     print(row)
-#
-# print(results)
+        if not self.server.exists(password_key):
+            print('такого користувача немає')
+            return
 
-# Завдання 1
-# Для бази даних «Лікарня», яку ви розробляли в рамках
-# курсу «Теорія Баз Даних», створіть додаток для взаємодії з
-# базою даних, який дозволяє:
-# ■ Вивести назви всіх таблиць у базі даних.
-def show_table_names():
-    print("Таблицi:")
-    for table_name in tables:
-        print('*', table_name)
+        true_password = self.server.get(password_key)
+        true_password = base64.b64decode(true_password).decode('utf-8')
 
-# ■ Показати всю таблицю
-def show_table(table_name):
-    query_text = f"""
-        SELECT *
-        FROM {table_name.upper()}
-    """
-
-    query_text = text(query_text)
-    query = session.execute(query_text)
-    results = query.all()
-
-    table = tables[table_name]
-    column_names = table.columns.keys()
-
-    for column in column_names:
-        print(f"{column:<15}", end='\t')
-    print()
-
-    for row in results:
-        for data in row:
-            print(f"{data:<15}", end='\t')
-        print()
-
-# ■ Вставляти рядки в таблиці бази даних.
-def insert_row(table_name):
-    table = tables[table_name]
-    column_names = table.columns.keys()
-
-    values = {}
-    for column in column_names:
-        if column == 'id':
-            continue
-        user_input = input(f"Введiть значення для {column}: ")
-        values[column] = user_input
-
-    columns_str = ', '.join(values.keys())
-    values_str = ', '.join([f"'{v}'" for v in values.values()])
-
-    query_text = f"""
-    INSERT INTO {table_name} ({columns_str})
-    VALUES ({values_str})
-    """
-
-    query_text = text(query_text)
-    session.execute(query_text)
-    session.commit()  # залити зміни на сервер
-
-    print("Дані додані успішно")
-
-    # print(query_text)
-    #
-    # print(values)
-    # print(columns_str)
-    # print(values_str)
+        if password == true_password:
+            print(f"Вхід у систему. Вітаємо {username}")
+            self.current_user = username
+        else:
+            print("Пароль невірний")
 
 
-insert_row('doctors')
-# ■ Оновлення рядків у таблицях бази даних. При спробі
-# оновлення усіх рядків в одній таблиці надайте запит на
-# підтвердження користувачеві. Оновлювати усі рядки
-# можна лише після підтвердження користувачем.
-# ■ Видалення рядків з таблиць баз даних. При спробі видалити
-# усі рядки в одній таблиці потрібно видавати користувачу
-# запит на підтвердження. Видаляти усі рядки, можна тільки
-# після підтвердження користувачем.
+    # ■ видалити користувача;
+    # ■ редагувати інформацію про користувача;
+    # ■ пошук користувача за ПІБ;
+    # ■ перегляд інформації про користувача;
+    # ■ перегляд усіх друзів користувача;
+    # ■ перегляд усіх публікацій користувача
+
+app = SocialApp()
+app.add_user('Anton', 'qwerty123')
+
+app.login('Jhon', 'qwerty123')
+app.login('Anton', 'qwerty1234')
+app.login('Anton', 'qwerty123')
